@@ -9,5 +9,6 @@
 --Instalar o Bootstrap 4 
     npm install bootstrap@4.1.3 jquery@3.3.1 popper.js@1.14.3 --save
 
+
 --Criado o banco de dados no myslq
 dbGerenciadorProjeto
