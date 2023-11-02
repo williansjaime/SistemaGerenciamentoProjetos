@@ -1,0 +1,46 @@
+<div class="container">  
+    <form>
+      <div class="login-container">
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+            <div class="form-group" style=" width: 100%; height: auto;">
+              <img style=" width: 30%; height: auto;" src="assets\image\logowillians.png" 
+              class="img-fluid align-content: center;">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <br>
+              <label>Usuário</label>
+              <br>
+              <input id="usuario" class="form-control">
+              <!--div ng-show="myForm.email.$error.email" class="error">Invalid email!</div-->
+              <!--div ng-show="myForm.email.$error.required &amp;&amp; myForm.email.$touched" class="error">Required!</div-->
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <br>
+              <label>Senha</label>
+              <input type="password" id="password" class="form-control">
+              <!--div ng-show="myForm.pass.$error.required &amp;&amp; myForm.pass.$touched" class="error">Required!</div-->
+            </div>
+          </div>
+          <br>
+          <div class="col-md-12">
+            <br>
+            <div class="form-group">
+              <div style="text-align: center;">Esqueceu a senha<a (click)="cadastrar()"  routerLink="cadastrousuario" class="link-dark"> Clique aqui</a></div>
+            </div>
+            </div>
+          <div class="col-md-12">
+            <br>
+            <div class="form-group">
+              <button mat-raised-button color="primary" [class.spinner]="loading" [disabled]="loading" (click)="login()" class="btn btn-primary btn-block">Login</button>
+            </div>
+          </div>          
+        </div>        
+      </div>
+    </form>
+  </div>
+
