@@ -4,12 +4,12 @@
 import logging
 import traceback
 from os import environ
-from json import dumps
 from flask import Flask
 from LogFile import LogFile
 from flask_cors import CORS
-from Controller import loginController
-from flask_restful import Resource, Api
+from flask_restful import Api
+
+from Model.CadastraProjetos import CadastraProjetos#,EditarProjetos,FinalizarProjetos
 
 app = Flask(__name__)
 api = Api(app)
@@ -17,9 +17,9 @@ CORS(app, resources={r"/api/*": {"Access-Control-Allow-Origin": "*"}})
 logging.getLogger('flask_cors').level = logging.DEBUG
 
 
-api.add_resource(selects.Estados, '/api/v1/estados/<token>')
-api.add_resource(selects.Produtos, '/api/v1/produtos/<senha>')
-api.add_resource(selects.CustoProduto, '/api/v1/custo_produtos/<senha>/<codProduto>')
+api.add_resource(CadastraProjetos.CadastraProjetos, '/api/v1/cadastrarprojetos/<token>')
+#api.add_resource(EditarProjetos.EditarProjetos, '/api/v1/editarprojetos/<token>')
+#api.add_resource(FinalizarProjetos.FinalizarProjetos, '/api/v1/finalizarprojetos/<token>/<codprojeto>')
 
 if __name__ == '_main_':
     try:
