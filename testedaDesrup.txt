@@ -5,9 +5,10 @@ Para avaliar suas habilidades técnicas e conhecimento das boas práticas de des
 Descrição do Teste:
 
 Você deverá desenvolver uma aplicação de Gerenciamento de Projetos que permitirá aos usuários criar e gerenciar projetos e suas respectivas tarefas. Esta aplicação é um pouco mais complexa do que uma simples lista de tarefas, pois envolve o gerenciamento de projetos com várias tarefas associadas a eles. As funcionalidades essenciais incluem:
-
-1. Criar um novo projeto: Os usuários devem poder adicionar um novo projeto, incluindo um nome, uma descrição e a data de início.
-
+    Cadastra Projetos
+1. Criar um novo projeto: Os usuários devem poder adicionar um novo projeto, incluindo um nome, uma descrição e a data de início. ok
+ 
+    Editar Projetos
 2. Listar todos os projetos: Os usuários devem poder listar todos os projetos atualmente na lista.
 
 3. Adicionar tarefas a um projeto: Os usuários devem poder adicionar tarefas a um projeto existente, incluindo um título, uma descrição e a data de conclusão da tarefa.

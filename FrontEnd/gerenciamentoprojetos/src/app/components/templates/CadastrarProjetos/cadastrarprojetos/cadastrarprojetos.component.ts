@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginserviceService } from 'src/app/components/services/LoginService/loginservice.service';
 import { CadastroserviceService } from 'src/app/components/services/CadastroService/cadastroservice.service';
+import { CadastroProjetos } from 'src/app/components/interfaces/CadastroInterface';
 
-export interface CadastroProjetos
-{
-  ID : string;
-  NomeProjeto: string;
-  DescricaoProjeto : string;
-  dataInicio : string;
-  user : string;
-}
 
 @Component({
   selector: 'app-cadastrarprojetos',
@@ -19,8 +12,7 @@ export interface CadastroProjetos
 
 export class CadastrarprojetosComponent {
 
-  user:string = "";
-  token:string = "";
+  user_token:string = "williansLindo";
   now:Date = new Date();
   total_dias:  number = 0;
   contar_lista:  number = 0;
@@ -34,7 +26,7 @@ export class CadastrarprojetosComponent {
       NomeProjeto: "",
       DescricaoProjeto : "",
       dataInicio : "",
-      user:this.user
+      userToken:this.user_token
     };
   } 
 
@@ -52,7 +44,7 @@ export class CadastrarprojetosComponent {
       NomeProjeto: "",
       DescricaoProjeto : "",
       dataInicio : "",
-      user:this.user
+      userToken:this.user_token
     };       
   }  
 
@@ -70,7 +62,7 @@ export class CadastrarprojetosComponent {
           NomeProjeto:nome_projeto.value,
           DescricaoProjeto : descricao_projeto.value,
           dataInicio: date_incicio.value,
-          user:this.user 
+          userToken:this.user_token 
         };                         
       }
     }
@@ -83,19 +75,19 @@ export class CadastrarprojetosComponent {
       this.AddItenLista(i);
     }
     if(this.contar_listas.length > 0){
-      /*const data = this.api_cadastro_projetos.PostJsonCadastroMaquina(this.contar_listas);
+      const data = this.api_cadastro_projetos.POST(this.contar_listas);
       if(data!=null){
         console.log(data);
         this.contar_listas = [];
         this.contar_lista = 0;
         this.contar_listas[0] = {
           ID:String(this.contar_lista),
-          MaquinaNome:"",
-          tipoMaquina : "",
-          datacriacao : this.now.toLocaleDateString(), 
-          user:this.user
+          NomeProjeto: "",
+          DescricaoProjeto : "",
+          dataInicio : "",
+          userToken:this.user_token
         };
-      }*/
+      }
     }
   }
 
