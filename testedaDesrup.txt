@@ -15,6 +15,7 @@ Você deverá desenvolver uma aplicação de Gerenciamento de Projetos que permi
 3. Adicionar tarefas a um projeto: Os usuários devem poder adicionar tarefas a um projeto existente, 
 incluindo um título, uma descrição e a data de conclusão da tarefa. ok testado
 
+ Realizar tarefas Projetos
 4. Listar tarefas de um projeto: Os usuários devem poder listar todas as tarefas associadas a um projeto específico.
 
 5. Marcar uma tarefa como concluída: Os usuários devem poder marcar uma tarefa específica como concluída.

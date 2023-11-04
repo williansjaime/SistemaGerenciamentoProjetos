@@ -8,6 +8,7 @@ import { LoginComponent } from './components/templates/Login/login/login.compone
 import { CadastrarprojetosComponent } from './components/templates/CadastrarProjetos/cadastrarprojetos/cadastrarprojetos.component';
 import { EditarprojetosComponent } from './components/templates/EditarProjetos/editarprojetos/editarprojetos.component';
 import { HeaderComponent } from './components/templates/Header/header/header.component';
+import { RealizartarefasComponent } from './components/templates/RealizarTarefas/realizartarefas/realizartarefas.component';
 
 const routes: Routes = [
 ];
@@ -18,7 +19,8 @@ const routes: Routes = [
     LoginComponent,
     CadastrarprojetosComponent,
     EditarprojetosComponent,
-    HeaderComponent
+    HeaderComponent,
+    RealizartarefasComponent
   ],
   imports: [
     BrowserModule,

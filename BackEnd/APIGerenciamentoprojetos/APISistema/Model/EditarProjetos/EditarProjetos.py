@@ -1,13 +1,10 @@
 import traceback
-from json import dumps
 from datetime import datetime
 from flask_restful import Resource
 from flask import request,json,jsonify
 
 from APISistema.LogFile import LogFile
 from APISistema.BancoDados.AcessarBanco import DB_MySql
-
-#from Controller import tokenController
 
 class EditarProjetos(Resource):
     '''
@@ -53,7 +50,8 @@ class EditarProjetos(Resource):
                     select_list_edite_projetos = cursor_db_mysql.fetchone()
                     i = i + 1  
                 db_mysql.connection.close()
-                return jsonify(lista_eidte_projetos)                
+                return jsonify(lista_eidte_projetos)    
+                        
         def post(self,token,id):
             if token == "williansLindo":            
                 my_json = request.data.decode('utf8').replace("'", '"')

@@ -28,6 +28,7 @@ export class HeaderComponent {
       this.cabecalho = "";
       if(url == '/header/cadastrar'){this.cabecalho = "Cadastrar Projetos"}
       if(url == '/header/editar'){this.cabecalho = "Editar Projetos"}
+      if(url == '/header/realizar'){this.cabecalho = "Realizar Tarefas"}
   }
 
   DoLogout() {

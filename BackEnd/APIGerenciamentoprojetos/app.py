@@ -25,7 +25,7 @@ logging.getLogger('flask_cors').level = logging.DEBUG
 
 api.add_resource(CadastraProjetos.CadastraProjetos, '/api/v1/cadastrarprojetos/<token>')
 api.add_resource(EditarProjetos.EditarProjetos, '/api/v1/editarprojetos/<token>/<id>')
-api.add_resource(RealizarProjetos.RealizarProjetos, '/api/v1/realizarprojetos/<token>/<codprojeto>')
+api.add_resource(RealizarProjetos.RealizarProjetos, '/api/v1/realizarprojetos/<token>/<id>')
 api.add_resource(FinalizarProjetos.FinalizarProjetos, '/api/v1/finalizarprojetos/<token>/<codprojeto>')
 
 if __name__ == '_main_':
