@@ -19,12 +19,12 @@ from APISistema.Model.FinalizarProjetos  import FinalizarProjetos
 app = Flask(__name__) 
 api = Api(app)
 
-CORS(app, resources={r"/api/*": {"Access-Control-Allow-Origin": "http://localhost:4200/"}})
+CORS(app, resources={r"/api/*": {"Access-Control-Allow-Origin": "http://localhost:4200"}})
 logging.getLogger('flask_cors').level = logging.DEBUG
 
 
 api.add_resource(CadastraProjetos.CadastraProjetos, '/api/v1/cadastrarprojetos/<token>')
-api.add_resource(EditarProjetos.EditarProjetos, '/api/v1/editarprojetos/<token>')
+api.add_resource(EditarProjetos.EditarProjetos, '/api/v1/editarprojetos/<token>/<id>')
 api.add_resource(RealizarProjetos.RealizarProjetos, '/api/v1/realizarprojetos/<token>/<codprojeto>')
 api.add_resource(FinalizarProjetos.FinalizarProjetos, '/api/v1/finalizarprojetos/<token>/<codprojeto>')
 

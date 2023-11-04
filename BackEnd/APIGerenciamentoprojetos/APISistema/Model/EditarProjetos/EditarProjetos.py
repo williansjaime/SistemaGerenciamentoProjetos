@@ -14,39 +14,47 @@ class EditarProjetos(Resource):
         Class Cadastrar Projetos no Banco
     ''' 
     try:
-        def get(self,token):
+        def get(self,token,id):
             if token == "williansLindo":
                 db_mysql = DB_MySql()
                 db_mysql.connect()
-                lista_projetos = {} 
+                lista_eidte_projetos = {} 
                 if db_mysql.connection is None:
                     return
                 cursor_db_mysql = db_mysql.connection.cursor()
-                select_projetos = """
+                select_edite_projetos = ("""
                     SELECT 
                         id, 
-                        dataHora, 
-                        NomeProjeto, 
-                        descricaoProjeto, 
-                        dataInicio, 
-                        token
-                    FROM dbGerenciadorProjeto.tbCadastroProjeto;
-                    """
-                cursor_db_mysql.execute(select_projetos)
-                select_list_projetos = cursor_db_mysql.fetchone()
+                        idProjeto, 
+                        nomeProjeto, 
+                        tarefa, 
+                        status, 
+                        inicioTarefa, 
+                        tarefaFinal
+                    FROM dbGerenciadorProjeto.tbEditarProjeto
+                        where
+                        idProjeto = {}
+                """).format(
+                        id
+                    )
+                cursor_db_mysql.execute(select_edite_projetos)
+                select_list_edite_projetos = cursor_db_mysql.fetchone()
                 i = 0
-                while select_list_projetos:                  
-                    lista_projetos[i] = {
-                            "ID":select_list_projetos[0],
-                            "DATAHORA":select_list_projetos[1],
-                            "DESCRICAO":select_list_projetos[2],
-                            "TOKEN":select_list_projetos[4],                          
-                        }
-                    select_list_projetos = cursor_db_mysql.fetchone()
+                while select_list_edite_projetos:                  
+                    lista_eidte_projetos[i] = {
+                        "id":select_list_edite_projetos[0],
+                        "idProjeto":select_list_edite_projetos[1],
+                        "nomeProjeto":select_list_edite_projetos[2],
+                        "tarefa":select_list_edite_projetos[3],
+                        "status":select_list_edite_projetos[4],
+                        "inicioTarefa":select_list_edite_projetos[5],
+                        "tarefaFinal" :select_list_edite_projetos[6],                         
+                    }
+                    select_list_edite_projetos = cursor_db_mysql.fetchone()
                     i = i + 1  
                 db_mysql.connection.close()
-                return jsonify(lista_projetos)             
-        def post(self,token):
+                return jsonify(lista_eidte_projetos)                
+        def post(self,token,id):
             if token == "williansLindo":            
                 my_json = request.data.decode('utf8').replace("'", '"')
                 data = json.loads(my_json)
@@ -59,28 +67,39 @@ class EditarProjetos(Resource):
                     cursor_db_mysql = db_mysql.connection.cursor()                    
                     content = data
                     for indx in range(len(content)):
-                        insert_cadastro_projeto  = ("""
-                            INSERT INTO dbGerenciadorProjeto.tbCadastroProjeto
+                        insert_cadastro_tarefas  = ("""
+                            INSERT INTO dbGerenciadorProjeto.tbEditarProjeto
                             (
-                                dataHora, 
-                                NomeProjeto, 
-                                descricaoProjeto, 
-                                dataInicio,
-                                token
+                                dataHora,
+                                idProjeto, 
+                                nomeProjeto, 
+                                tarefa, 
+                                status, 
+                                token, 
+                                inicioTarefa, 
+                                tarefaFinal,
+                                descricao
                             )VALUES(
                                 '{}'
+                                ,{}
+                                ,'{}'
+                                ,'{}'
+                                ,1
                                 ,'{}'
                                 ,'{}'
                                 ,'{}'
                                 ,'{}'
                             )""").format(
                                 current_dateTime, 
-                                content[indx]["NomeProjeto"],
-                                content[indx]["DescricaoProjeto"],
-                                content[indx]["dataInicio"],  
-                                content[indx]["userToken"],                                                                                                                  
+                                content[indx]["idProjeto"],
+                                content[indx]["nomeProjeto"],
+                                content[indx]["tarefa"],  
+                                content[indx]["userToken"],    
+                                content[indx]["dataInicioTarefa"],   
+                                content[indx]["dataFinalTarefa"],
+                                content[indx]["descricao"],  
                             )
-                        cursor_db_mysql.execute(insert_cadastro_projeto)
+                        cursor_db_mysql.execute(insert_cadastro_tarefas)
                         db_mysql.connection.commit()            
                     db_mysql.connection.close()         
     

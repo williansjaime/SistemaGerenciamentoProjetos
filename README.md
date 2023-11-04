@@ -23,3 +23,26 @@ CREATE TABLE dbGerenciadorProjeto.tbCadastroProjeto (
 )
 # Adicionar a coluna token para saber quem criou 
 ALTER TABLE dbGerenciadorProjeto.tbCadastroProjeto ADD token varchar(150) NOT NULL;
+
+# Criar tabela Editar tarefa
+CREATE TABLE dbGerenciadorProjeto.tbEditarProjeto (
+	id INTEGER auto_increment NOT NULL,
+	idProjeto INTEGER NOT NULL,
+	nomeProjeto varchar(150) NOT NULL,
+	tarefa varchar(500) NOT NULL,
+	status BINARY NOT NULL,
+	token varchar(150) NOT NULL,
+	inicioTarefa DATE NOT NULL,
+	tarefaFinal DATE NOT NULL,
+	CONSTRAINT tbEditarProjeto_PK PRIMARY KEY (id)
+)
+
+# Tive que adicionar tabela tbEditarProjeto a coluna dataHora ao banco
+ALTER TABLE dbGerenciadorProjeto.tbEditarProjeto ADD dataHora DATETIME NOT NULL;
+
+# Tive que adicionar tabela tbEditarProjeto a coluna descricao
+ALTER TABLE dbGerenciadorProjeto.tbEditarProjeto ADD descricao varchar(400) NOT NULL;
+
+# Gerar o Select
+SELECT id, idProjeto, nomeProjeto, tarefa, status, token, inicioTarefa, tarefaFinal
+FROM dbGerenciadorProjeto.tbEditarProjeto;

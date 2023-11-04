@@ -23,7 +23,11 @@ export class HeaderComponent {
   }
 
   atualisarRoute(url:string){
-    this.router.navigate(['/header/cadastrar']);
+      this.urlRetorno="";
+      this.urlRetorno = url;
+      this.cabecalho = "";
+      if(url == '/header/cadastrar'){this.cabecalho = "Cadastrar Projetos"}
+      if(url == '/header/editar'){this.cabecalho = "Editar Projetos"}
   }
 
   DoLogout() {
@@ -42,7 +46,16 @@ export class HeaderComponent {
     }
   }
 
+  
   CabecalhoRota() {
+    const urlToCabecalho: {
+      [key: string]: string;
+    } = {
+      '/header/cadastrarprojetos': 'Cadastrar Projetos',
+      '/header/editarprojetos': 'Editar Projetos',
+    };
+    
+    this.cabecalho = urlToCabecalho[this.urlRetorno] || '';
   }
    
   ToggleSidebar(): void {

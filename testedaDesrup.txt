@@ -9,9 +9,11 @@ Você deverá desenvolver uma aplicação de Gerenciamento de Projetos que permi
 1. Criar um novo projeto: Os usuários devem poder adicionar um novo projeto, incluindo um nome, uma descrição e a data de início. ok
  
     Editar Projetos
-2. Listar todos os projetos: Os usuários devem poder listar todos os projetos atualmente na lista.
+    
+2. Listar todos os projetos: Os usuários devem poder listar todos os projetos atualmente na lista.ok ja testado
 
-3. Adicionar tarefas a um projeto: Os usuários devem poder adicionar tarefas a um projeto existente, incluindo um título, uma descrição e a data de conclusão da tarefa.
+3. Adicionar tarefas a um projeto: Os usuários devem poder adicionar tarefas a um projeto existente, 
+incluindo um título, uma descrição e a data de conclusão da tarefa. ok testado
 
 4. Listar tarefas de um projeto: Os usuários devem poder listar todas as tarefas associadas a um projeto específico.
 

@@ -25,11 +25,8 @@ class CadastraProjetos(Resource):
                 select_projetos = """
                     SELECT 
                         id, 
-                        dataHora, 
-                        NomeProjeto, 
-                        descricaoProjeto, 
-                        dataInicio, 
-                        token
+                        NomeProjeto,
+                        dataInicio
                     FROM dbGerenciadorProjeto.tbCadastroProjeto;
                     """
                 cursor_db_mysql.execute(select_projetos)
@@ -37,11 +34,10 @@ class CadastraProjetos(Resource):
                 i = 0
                 while select_list_projetos:                  
                     lista_projetos[i] = {
-                            "ID":select_list_projetos[0],
-                            "DATAHORA":select_list_projetos[1],
-                            "DESCRICAO":select_list_projetos[2],
-                            "TOKEN":select_list_projetos[4],                          
-                        }
+                        "ID" : select_list_projetos[0],
+                        "NomeProjeto": select_list_projetos[1],
+                        "dataInicio" : str(select_list_projetos[2]),
+                    }
                     select_list_projetos = cursor_db_mysql.fetchone()
                     i = i + 1  
                 db_mysql.connection.close()

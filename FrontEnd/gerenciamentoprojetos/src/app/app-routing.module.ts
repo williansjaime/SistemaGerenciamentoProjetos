@@ -24,6 +24,7 @@ const routes: Routes = [
     children: [
     { path:'cadastrar', component: CadastrarprojetosComponent},
     { path:'editar', component: EditarprojetosComponent},
+    
     ]
   }
   ];

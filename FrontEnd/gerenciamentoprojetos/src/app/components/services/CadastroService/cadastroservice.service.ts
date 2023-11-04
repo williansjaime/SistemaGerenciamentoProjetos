@@ -18,7 +18,7 @@ export class CadastroserviceService {
           method: 'GET',
           headers: { 
               'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
+              'Access-Control-Allow-Origin': 'http://localhost:4200'
           },
         };
         const data = await fetch(API_URL+this.url_API,requestOptions)
@@ -36,7 +36,7 @@ export class CadastroserviceService {
           method: 'POST',
           headers: { 
               'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
+              'Access-Control-Allow-Origin': 'http://localhost:4200'
           },
           body: JSON.stringify(dataJSON)
         };

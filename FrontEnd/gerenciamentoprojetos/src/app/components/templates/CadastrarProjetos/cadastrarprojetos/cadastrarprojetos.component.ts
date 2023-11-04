@@ -12,7 +12,7 @@ import { CadastroProjetos } from 'src/app/components/interfaces/CadastroInterfac
 
 export class CadastrarprojetosComponent {
 
-  user_token:string = "williansLindo";
+  user_token:string = "vazio";
   now:Date = new Date();
   total_dias:  number = 0;
   contar_lista:  number = 0;
