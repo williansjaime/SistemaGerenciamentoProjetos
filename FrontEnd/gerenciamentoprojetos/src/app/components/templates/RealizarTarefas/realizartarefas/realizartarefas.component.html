@@ -11,7 +11,7 @@
                 </div>
             </form>
         </div>
-        <div class="">
+        <div class="col-sm-1">
             <div class="form-group">
                 <label for="exampleFormControlSelect1"></label>
                 <div class="form-outline" >
@@ -21,7 +21,14 @@
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
                     </button>
-                    <button type="button" class="btn"  data-placement="top" title="Salvar" (click)="SalvarCadastroTarefas()"><img  width="20" height="20" fill="currentColor" 
+                </div>                        
+            </div>
+        </div> 
+        <div class="col-sm-1">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <div class="form-outline" >
+                    <button type="button" class="btn"  data-placement="top" title="Salvar" (click)="SalvarStatusTarefas()"><img  width="20" height="20" fill="currentColor" 
                         class="bi bi-save" viewBox="0 0 16 16" src="assets\image\disc-icon-semfundo.png"/>
                     </button>
                 </div>                        
@@ -35,17 +42,21 @@
             <tr>
                 <th>Tarefa</th>
                 <th>Descrição</th>
-                <th>Data Inícial da Tarefa</th>
-                <th>Data Final da Tarefa</th>
+                <th>Data Inícial</th>
+                <th>Data Final</th>
+                <th style="text-align: center;">Realizar</th>
+                <th style="text-align: center;">Concluída</th>
                 <th></th>
             </tr>
         </thead>
         <tbody *ngIf="lista_tarefas_registradas.length > 0"> 
-            <tr *ngFor ="let order of lista_tarefas_registradas; let i = index">
+            <tr *ngFor ="let order of lista_tarefas_registradas; let i = index" >
                 <td>{{order.tarefa}}</td>
                 <td>{{order.descricao}}</td>
                 <td>{{order.inicioTarefa}}</td>
                 <td>{{order.tarefaFinal}}</td>
+                <td style="text-align: center;"><input type="checkbox" (click)="CheckRadioButtons(i)" id="{{'realizar'+i}}"></td>
+                <td style="text-align: center;"><input type="checkbox" (click)="CheckRadioButtons(i)" id="{{'concluida'+i}}"></td>
                 <td></td>
                 <td data-placement="top" title="Deletar">
                     <button class="btn btn-danger" (click)="DeletarIten(i)"> 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { CadastroProjetos } from 'src/app/components/interfaces/CadastroInterface';
-import { CadastroTarefasProjetos } from 'src/app/components/interfaces/EditarInterface';
 import { CadastroserviceService } from 'src/app/components/services/CadastroService/cadastroservice.service';
 import { RealizarTarefasProjetos } from 'src/app/components/interfaces/RealizarInterface';
 import { RealizartarefaserviceService } from 'src/app/components/services/RealizarTarefas/realizartarefaservice.service';
@@ -13,9 +12,9 @@ import { RealizartarefaserviceService } from 'src/app/components/services/Realiz
 })
 
 export class RealizartarefasComponent {
+  
   user:string = "";
   token:string = "";
-  contar_lista:  number = 0; 
   lista_projetos: CadastroProjetos[] = []; 
   lista_tarefas_registradas: RealizarTarefasProjetos[] = []; 
   
@@ -27,7 +26,6 @@ export class RealizartarefasComponent {
   OnInit(){
     this.user;
     this.token;
-    this.contar_lista;
     this.lista_projetos; 
     this.lista_tarefas_registradas; 
   }
@@ -35,12 +33,11 @@ export class RealizartarefasComponent {
   OnDestroy(){
     this.user;
     this.token;
-    this.contar_lista;
     this.lista_projetos;
     this.lista_tarefas_registradas;
     
   }
-  
+  //Metodo para carregar a lista projetos
   async GetProjetoLista()
   {    
     this.lista_projetos = [];        
@@ -56,7 +53,7 @@ export class RealizartarefasComponent {
   //Metodo para pegar as tarefas já cadastrar neste projeto
   async GetListaTarefas(id:number) 
   {    
-    this.lista_tarefas_registradas = [];        
+    this.lista_tarefas_registradas = [];   
     const data = await this.API_realizar_service.GET(id); 
     if (data !== null && data !== undefined) 
     {
@@ -67,8 +64,7 @@ export class RealizartarefasComponent {
         {
           // Realize a conversão de tipo para 'CadastroTarefasProjetos'
           const cadastroTarefa: RealizarTarefasProjetos = value as RealizarTarefasProjetos;
-          this.lista_tarefas_registradas.push(cadastroTarefa);        
-          console.log(this.lista_tarefas_registradas);   
+          this.lista_tarefas_registradas.push(cadastroTarefa);     
         }
       }
     }
@@ -81,66 +77,76 @@ export class RealizartarefasComponent {
     if(id_projeto!=null)
     {
       this.GetListaTarefas(Number(id_projeto.value));
-      /*const nome_projeto = this.lista_projetos.filter((el: any) => el.ID == Number(id_projeto.value));    
-      this.lista_tarefas_registradas[this.contar_lista] = 
-      {
-        idProjeto : Number(id_projeto.value),
-        nomeProjeto: nome_projeto[0].NomeProjeto,
-        tarefa :"",
-        descricao : "",
-        dataInicioTarefa : "",
-        dataFinalTarefa : "",
-        userToken : "",
-      };
-      this.contar_lista++;*/
     }
   }
   
-  AddItenLista(id:number):void
-  {
-    if(id != null)
-    { 
-      const id_projeto = document.getElementById(('IDdoProjetoselect')) as HTMLInputElement || null;
-      const tarefa = document.getElementById(('tarefa'+id)) as HTMLInputElement || null;
-      const descricao_tarefa = document.getElementById(('descricao'+id)) as HTMLInputElement || null;
-      const date_incicio_tarefa = document.getElementById(('dateIncicio'+id)) as HTMLInputElement || null;
-      const data_final_tarefa = document.getElementById(('dataFinal'+id)) as HTMLInputElement || null;
-      
-      if(tarefa != null && date_incicio_tarefa != null && data_final_tarefa !=null && id_projeto!=null)
-      {
-        const nome_projeto = this.lista_projetos.filter((el: any) => el.ID == Number(id_projeto.value)); 
-        /*this.lista_tarefas_registradas[id] = 
-        {
-          idProjeto : Number(id_projeto.value),
-          nomeProjeto: nome_projeto[0].NomeProjeto,
-          tarefa :tarefa.value,
-          descricao :descricao_tarefa.value,
-          dataInicioTarefa : date_incicio_tarefa.value,
-          dataFinalTarefa : data_final_tarefa.value,
-          userToken : "vazio",
-        };*/
-      }      
+  //Metodo para evitar que radion button seja marcado 
+  CheckRadioButtons(id:number){
+    // Selecione os radio buttons
+    const realizartarefas = document.getElementById(('realizar'+id)) as HTMLInputElement;
+    const concluirtarefa = document.getElementById(('concluida'+id)) as HTMLInputElement;
+
+    // Adicione ouvintes de eventos de clique a ambos os radio buttons
+    realizartarefas.addEventListener('click', () => {
+      realizartarefas.checked = true;
+      concluirtarefa.checked = false;        
+    });
+
+    concluirtarefa.addEventListener('click', () => {
+      concluirtarefa.checked = true;
+      realizartarefas.checked = false;
+    });
+
+  }
+  
+  //Atualizar lista de tarefas
+  Atualizar(id:number){
+    const realizartarefas = document.getElementById(('realizar'+id)) as HTMLInputElement;
+    const concluirtarefa = document.getElementById(('concluida'+id)) as HTMLInputElement;
+    if(realizartarefas!= null && concluirtarefa != null){
+      let status:number = 1;
+      status = realizartarefas.checked==true?2:status;
+      status = concluirtarefa.checked==true?3:status;
+
+      this.lista_tarefas_registradas[id] = 
+          {
+            ...this.lista_tarefas_registradas[id],
+            status:status,
+            userToken:'Atualizado',
+          };
     }
   }
 
-  SalvarCadastroTarefas()
+  SalvarStatusTarefas()
   {
-    for (let i = 0; i <= this.contar_lista; i++)
-    {
-      this.AddItenLista(i);
-    }
     if(this.lista_tarefas_registradas.length > 0)
     {
-      /*this.API_edite_service.POST(this.lista_tarefas);
-      this.lista_tarefas = [];
-      this.contar_lista = 0;*/
+      for(const value in this.lista_tarefas_registradas)
+      {
+        this.Atualizar(Number(value));
+      }
+      this.API_realizar_service.PATCH(this.lista_tarefas_registradas);
+      this.lista_tarefas_registradas = [];
     }
   }
 
-  DeletarIten(id:number){
+  //Limpar as lista de objestos
+  DeletarIten(id:number)
+  {   
+    this.DeleteTarefa(id);    
     if(Array.isArray(this.lista_tarefas_registradas)){
       this.lista_tarefas_registradas.splice(id, 1); 
-      this.contar_lista--;
     } 
+  }
+  
+  async DeleteTarefa(id:number)  
+  {    
+    this.lista_tarefas_registradas = [];   
+    const data = await this.API_realizar_service.DELETE(id);
+    if(data.ok){
+      window.alert("Tarefa Deletada com sucesso");
+    }else{
+      window.alert("Erro ao deletar a tarefa")
+    }
   }
 }

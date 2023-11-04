@@ -32,7 +32,7 @@ export class LoginComponent
     if (senhaId != null && userId != null && userId!=undefined && senhaId!=undefined) 
     {
       console.log(senhaId,userId);
-      this.router.navigate(['/header']);
+      this.router.navigate(['/header/cadastrar']);
     }else{
       this.loading = false;
       window.alert("Erro ao efetuar Login\n Digite os dados corretamente!");

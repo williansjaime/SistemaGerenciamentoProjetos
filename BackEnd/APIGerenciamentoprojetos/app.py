@@ -28,10 +28,10 @@ api.add_resource(EditarProjetos.EditarProjetos, '/api/v1/editarprojetos/<token>/
 api.add_resource(RealizarProjetos.RealizarProjetos, '/api/v1/realizarprojetos/<token>/<id>')
 api.add_resource(FinalizarProjetos.FinalizarProjetos, '/api/v1/finalizarprojetos/<token>/<codprojeto>')
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     try:
-        app.config['DEBUG'] = False     
-        app.run() 
+        context = ('server.crt', 'server.key')
+        app.run(ssl_context=context, debug=True)
         
     except Exception as err:
         traceback.print_exc()        

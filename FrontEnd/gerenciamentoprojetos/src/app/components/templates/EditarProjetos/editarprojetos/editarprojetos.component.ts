@@ -12,12 +12,10 @@ import { EditeserviceService } from 'src/app/components/services/EditeService/ed
 })
 export class EditarprojetosComponent {
 
-  user:string = "";
   token:string = "";
-  contar_lista:  number = 0; 
+  numero_linhas:  number = 0; 
   lista_projetos: CadastroProjetos[] = []; 
   lista_tarefas: CadastroTarefasProjetos[] = []; 
-  lista_tarefas_registradas: CadastroTarefasProjetos[] = []; 
   
   constructor(private API_cadastro_service:CadastroserviceService, private API_edite_service:EditeserviceService) 
   {
@@ -25,21 +23,17 @@ export class EditarprojetosComponent {
   } 
 
   OnInit(){
-    this.user;
     this.token;
-    this.contar_lista;
+    this.numero_linhas;
     this.lista_projetos; 
     this.lista_tarefas;  
-    this.lista_tarefas_registradas; 
   }
 
   OnDestroy(){
-    this.user;
     this.token;
-    this.contar_lista;
+    this.numero_linhas;
     this.lista_projetos;
     this.lista_tarefas;
-    this.lista_tarefas_registradas;
     
   }
   
@@ -47,43 +41,23 @@ export class EditarprojetosComponent {
   {    
     this.lista_projetos = [];        
     const data = await this.API_cadastro_service.GET();
-    if(data!=null){
+    if(data!=null)
+    {
       for (var value in data) 
       {
         this.lista_projetos.push(data[value]);            
-      }
+      }      
     }
   }
-   
-  //Metodo para pegar as tarefas já cadastrar neste projeto
-  async GetListaTarefas(id:number) 
-  {    
-    this.lista_tarefas = [];        
-    const data = await this.API_edite_service.GET(id); 
-    if (data !== null && data !== undefined) 
-    {
-      const values = Object.values(data);
-      for (const value of values) 
-      {
-        if (value !== null && value !== undefined && value !== '') 
-        {
-          // Realize a conversão de tipo para 'CadastroTarefasProjetos'
-          const cadastroTarefa: CadastroTarefasProjetos = value as CadastroTarefasProjetos;
-          this.lista_tarefas_registradas.push(cadastroTarefa);            
-        }
-      }
-    }
-  }
-  
+ 
   //Vai adicionar lista de tarefas e se tiver tarefas vai caregar
   AddIten():void
   {
     const id_projeto = document.getElementById(('IDdoProjetoselect')) as HTMLInputElement || null;
     if(id_projeto!=null)
     {
-      //this.GetListaTarefas(Number(id_projeto.value));
       const nome_projeto = this.lista_projetos.filter((el: any) => el.ID == Number(id_projeto.value));    
-      this.lista_tarefas[this.contar_lista] = 
+      this.lista_tarefas[this.numero_linhas] = 
       {
         idProjeto : Number(id_projeto.value),
         nomeProjeto: nome_projeto[0].NomeProjeto,
@@ -93,7 +67,7 @@ export class EditarprojetosComponent {
         dataFinalTarefa : "",
         userToken : "",
       };
-      this.contar_lista++;
+      this.numero_linhas++;
     }
   }
   
@@ -124,24 +98,33 @@ export class EditarprojetosComponent {
     }
   }
 
-  SalvarCadastroTarefas()
+  async SalvarCadastroTarefas()
   {
-    for (let i = 0; i <= this.contar_lista; i++)
+    for (const valor in this.lista_tarefas)
     {
-      this.AddItenLista(i);
+      this.AddItenLista(Number(valor));
     }
     if(this.lista_tarefas.length > 0)
     {
-      this.API_edite_service.POST(this.lista_tarefas);
-      this.lista_tarefas = [];
-      this.contar_lista = 0;
+      const data = await this.API_edite_service.POST(this.lista_tarefas);
+      if(data!=null)
+      {
+        if(data.ok)
+        {
+          window.alert("Tarefas salvas com sucesso");
+          this.lista_tarefas = [];
+          this.numero_linhas = 0;
+        }else{
+          window.alert("Erro ao salvas as tarefa");
+        }
+      }      
     }
   }
 
   DeletarIten(id:number){
     if(Array.isArray(this.lista_tarefas)){
       this.lista_tarefas.splice(id, 1); 
-      this.contar_lista--;
+      this.numero_linhas--;
     } 
   }
 }

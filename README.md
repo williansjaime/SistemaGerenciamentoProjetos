@@ -46,3 +46,6 @@ ALTER TABLE dbGerenciadorProjeto.tbEditarProjeto ADD descricao varchar(400) NOT 
 # Gerar o Select
 SELECT id, idProjeto, nomeProjeto, tarefa, status, token, inicioTarefa, tarefaFinal
 FROM dbGerenciadorProjeto.tbEditarProjeto;
+
+# Mudança na coluna status pelo erro na API ao converter Binario para JSON
+ALTER TABLE dbGerenciadorProjeto.tbEditarProjeto MODIFY COLUMN status INT NOT NULL;

@@ -25,7 +25,7 @@ export class CadastroserviceService {
             .then(response => response.json());
             return data;
       } catch (error) {
-        console.error(error);
+        return error;
       } 
   }
 
@@ -44,7 +44,7 @@ export class CadastroserviceService {
         .then(response => response.json());
         return data;
     } catch (error) {
-      console.error(error);
+      return error;
     }  
   } 
 }

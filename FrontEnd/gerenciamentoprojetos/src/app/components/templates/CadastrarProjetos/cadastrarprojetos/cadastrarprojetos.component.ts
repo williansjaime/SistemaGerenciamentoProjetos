@@ -12,17 +12,16 @@ import { CadastroProjetos } from 'src/app/components/interfaces/CadastroInterfac
 
 export class CadastrarprojetosComponent {
 
-  user_token:string = "vazio";
-  now:Date = new Date();
-  total_dias:  number = 0;
-  contar_lista:  number = 0;
-  contar_listas: CadastroProjetos[] = []; 
+  user_token:string;
+  numero_linhas:  number = 0;
+  lista_projeto: CadastroProjetos[] = []; 
   loading:boolean =  false;  
   
   constructor(private api_cadastro_projetos: CadastroserviceService,private loginserver: LoginserviceService) 
   {
-    this.contar_listas[0] = {
-      ID:String(this.contar_lista),
+    this.user_token = "vazio"; 
+    this.lista_projeto[0] = {
+      ID:String(this.numero_linhas),
       NomeProjeto: "",
       DescricaoProjeto : "",
       dataInicio : "",
@@ -31,16 +30,14 @@ export class CadastrarprojetosComponent {
   } 
 
   OnInit(){
-    this.now;
-    this.total_dias;
-    this.contar_lista;
-    this.contar_listas;
+    this.numero_linhas;
+    this.lista_projeto;
   }
   
   AddIten(){
-    this.contar_lista++;
-    this.contar_listas[this.contar_lista] = {
-      ID:String(this.contar_lista),
+    this.numero_linhas++;
+    this.lista_projeto[this.numero_linhas] = {
+      ID:String(this.numero_linhas),
       NomeProjeto: "",
       DescricaoProjeto : "",
       dataInicio : "",
@@ -54,48 +51,56 @@ export class CadastrarprojetosComponent {
       const nome_projeto = document.getElementById(('NomeProjeto'+id)) as HTMLInputElement ;
       const descricao_projeto = document.getElementById(('DescricaoProjeto'+id)) as HTMLInputElement;
       const date_incicio = document.getElementById(('dateIncicio'+id)) as HTMLInputElement;
-
-      if(nome_projeto != null && descricao_projeto != null)
+      if(nome_projeto != null && descricao_projeto != null && 
+        descricao_projeto.value !="" && nome_projeto.value != "" && date_incicio.value != "")
       {
-        this.contar_listas[id] = {
-          ID:String(this.contar_lista),
+        this.lista_projeto[id] = {
+          ID:String(this.numero_linhas),
           NomeProjeto:nome_projeto.value,
           DescricaoProjeto : descricao_projeto.value,
           dataInicio: date_incicio.value,
           userToken:this.user_token 
         };                         
+      }else{
+        window.alert("Preencha todos os campos.");
       }
     }
   }
   
 
-  SalvarProjeto(){
-    for (let i = 0; i <= this.contar_lista; i++)
+  async SalvarProjeto()
+  {
+    for(const valor in this.lista_projeto)
     {
-      this.AddItenLista(i);
+      this.AddItenLista(Number(valor));
     }
-    if(this.contar_listas.length > 0){
-      const data = this.api_cadastro_projetos.POST(this.contar_listas);
-      if(data!=null){
-        console.log(data);
-        this.contar_listas = [];
-        this.contar_lista = 0;
-        this.contar_listas[0] = {
-          ID:String(this.contar_lista),
-          NomeProjeto: "",
-          DescricaoProjeto : "",
-          dataInicio : "",
-          userToken:this.user_token
-        };
+    if(this.lista_projeto.length > 0){
+      const data = await this.api_cadastro_projetos.POST(this.lista_projeto);
+      if(data!=null)
+      {
+        if(data.ok){
+          window.alert("Projeto salvo com sucesso.");
+          this.lista_projeto = [];
+          this.numero_linhas = 0;
+          this.lista_projeto[0] = {
+            ID:String(this.numero_linhas),
+            NomeProjeto: "",
+            DescricaoProjeto : "",
+            dataInicio : "",
+            userToken:this.user_token
+          };
+        }else{
+          window.alert("Erro ao salvar projeto.");
+        }
       }
     }
   }
 
   DeletarProjeto(id:number)
   {
-    if(Array.isArray(this.contar_listas)){
-      this.contar_listas.splice(id, 1); 
-      this.contar_lista--;
+    if(Array.isArray(this.lista_projeto)){
+      this.lista_projeto.splice(id, 1); 
+      this.numero_linhas--;
     } 
   }
 }

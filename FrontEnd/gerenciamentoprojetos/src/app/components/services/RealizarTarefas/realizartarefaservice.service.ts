@@ -27,7 +27,7 @@ export class RealizartarefaserviceService {
             .then(response => response.json());
             return data;
       } catch (error) {
-        console.error(error);
+        return error;
       } 
   }
 
@@ -46,7 +46,7 @@ export class RealizartarefaserviceService {
         .then(response => response.json());
         return data;
     } catch (error) {
-      console.error(error);
+      return error;
     }  
   } 
 
@@ -54,7 +54,7 @@ export class RealizartarefaserviceService {
   { 
     try{
         const requestOptions = {
-          method: 'POST',
+          method: 'PATCH',
           headers: { 
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': 'http://localhost:4200'
@@ -65,7 +65,26 @@ export class RealizartarefaserviceService {
         .then(response => response.json());
         return data;
     } catch (error) {
-      console.error(error);
+      return error;
     }  
   }
+
+  async DELETE(id:number)
+  { 
+    try{
+        const requestOptions = {
+          method: 'DELETE',
+          headers: { 
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:4200'
+          }
+        };
+        const data = await fetch(API_URL+this.url_API+"/"+id, requestOptions)
+        .then(response => response.json());
+        return data;
+    } catch (error) {
+      return error;
+    }  
+  }
+
 }

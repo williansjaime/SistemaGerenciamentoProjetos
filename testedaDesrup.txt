@@ -16,21 +16,23 @@ Você deverá desenvolver uma aplicação de Gerenciamento de Projetos que permi
 incluindo um título, uma descrição e a data de conclusão da tarefa. ok testado
 
  Realizar tarefas Projetos
-4. Listar tarefas de um projeto: Os usuários devem poder listar todas as tarefas associadas a um projeto específico.
 
-5. Marcar uma tarefa como concluída: Os usuários devem poder marcar uma tarefa específica como concluída.
+4. Listar tarefas de um projeto: Os usuários devem poder listar todas as tarefas associadas a um projeto específico. ok
 
-6. Excluir uma tarefa: Os usuários devem poder excluir uma tarefa de um projeto.
+5. Marcar uma tarefa como concluída: Os usuários devem poder marcar uma tarefa específica como concluída. ok
+
+6. Excluir uma tarefa: Os usuários devem poder excluir uma tarefa de um projeto. ok
+
 
 Requisitos do Teste:
 
-- Utilize Node.js para criar a aplicação.
-- Utilize um banco de dados relacional (MySQL, PostgreSQL, etc.) para armazenar projetos e tarefas.
-- Crie endpoints RESTful para cada operação descrita acima.
+- Utilize Node.js para criar a aplicação. ok
+- Utilize um banco de dados relacional (MySQL, PostgreSQL, etc.) para armazenar projetos e tarefas. ok
+- Crie endpoints RESTful para cada operação descrita acima. ok
 - Desenvolva um frontend para a aplicação utilizando uma tecnologia da sua escolha.
-- Integre o frontend com o backend para que os usuários possam interagir com a aplicação por meio de uma interface.
-- Utilize uma ferramenta de controle de versão para versionar seu código e forneça o link do repositório.
-- Documente o projeto, incluindo a estrutura do banco de dados, as rotas da API e instruções claras de como configurar e executar a aplicação.
+- Integre o frontend com o backend para que os usuários possam interagir com a aplicação por meio de uma interface. ok
+- Utilize uma ferramenta de controle de versão para versionar seu código e forneça o link do repositório. ok
+- Documente o projeto, incluindo a estrutura do banco de dados, as rotas da API e instruções claras de como configurar e executar a aplicação. ok
 
 Estamos ansiosos para conhecer sua solução completa e avaliar seu potencial para se juntar à nossa equipe. Boa sorte!
 

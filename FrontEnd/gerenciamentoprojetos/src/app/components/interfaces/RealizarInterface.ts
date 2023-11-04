@@ -1,10 +1,10 @@
 export interface RealizarTarefasProjetos
 {
-    idTarefa: Number;
-    idProjeto: Number;
+    idTarefa: number;
+    idProjeto: number;
     tarefa: string;
-    status: string;
-    token: string;
+    status: number;
+    userToken: string;
     inicioTarefa: string;
     tarefaFinal: string;
     dataHora: string;

@@ -13,5 +13,8 @@ source apigerenciamentoprojeto/bin/activate
 # Criar arquivo de biblioteca em python
 pip freeze > requirements.txt 
 
+# Sempre que instalar biblioteca usar esse comando
+pip freeze 
+
 # Executar sistema no linux terminal
 flask --app app run --debug

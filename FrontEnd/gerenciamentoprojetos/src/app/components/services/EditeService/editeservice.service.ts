@@ -27,7 +27,7 @@ export class EditeserviceService {
             .then(response => response.json());
             return data;
       } catch (error) {
-        console.error(error);
+        return error;
       } 
   }
 
@@ -46,7 +46,7 @@ export class EditeserviceService {
         .then(response => response.json());
         return data;
     } catch (error) {
-      console.error(error);
+      return error;
     }  
   } 
 }
