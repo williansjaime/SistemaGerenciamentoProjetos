@@ -36,7 +36,7 @@ export class LoginComponent
         usuario:userId.value,
         senha:senhaId.value
       }
-      this.loginserver.POST(this.login_lista);
+      this.loginserver.GET(this.login_lista);
       
       this.router.navigate(['/header/cadastrar']);
     }else{

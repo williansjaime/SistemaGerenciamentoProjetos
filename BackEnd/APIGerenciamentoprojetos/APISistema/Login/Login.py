@@ -14,7 +14,17 @@ class Login(Resource):
         Class Realizar Login
     '''
     try:
-        def post(self):
+        def get(self,senha,usuario):
+            lista_usuario = verificar_user_db(senha,usuario)
+            if not lista_usuario:
+                return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="User does not exist !!"'})
+
+            if not check_password_hash(str(lista_usuario[0]["senha"]), str(senha)):
+                return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="User does not exist !!"'})
+
+            return {'user': usuario.upper(), 'token': lista_usuario[0]["token"]}
+        
+        def post(self,senha=None,usuario=None):
             data = request.get_json()
             if not data or 'senha' not in data[0] or 'usuario' not in data[0]:
                 return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required !!"'})

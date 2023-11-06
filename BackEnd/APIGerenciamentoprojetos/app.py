@@ -25,7 +25,7 @@ CORS(app, resources={r"/api/*": {"Access-Control-Allow-Origin": "http://localhos
 logging.getLogger('flask_cors').level = logging.DEBUG
 
 """Adicionar as rotas de API"""
-api.add_resource(Login.Login, '/api/v1/login')
+api.add_resource(Login.Login, '/api/v1/login/<senha>/<usuario>')
 api.add_resource(CadastroUsuario.CadastroUsuario, '/api/v1/cadastrousuario')
 
 api.add_resource(CadastraProjetos.CadastraProjetos, '/api/v1/cadastrarprojetos/<token>')

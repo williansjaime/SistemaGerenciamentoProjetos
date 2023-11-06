@@ -11,12 +11,13 @@ import { LoginserviceService } from '../LoginService/loginservice.service';
 export class EditeserviceService {
   url_API:string = "";
 
-  constructor(private loginserver: LoginserviceService) { 
-    this.url_API = "/api/v1/editarprojetos/"+this.loginserver.getToken();
+  constructor(private login_server: LoginserviceService) { 
+    this.url_API = "/api/v1/editarprojetos/"+this.login_server.getToken();
   }
 
   async GET(id:number){
     try{
+        this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
         const requestOptions = {
           method: 'GET',
           headers: { 

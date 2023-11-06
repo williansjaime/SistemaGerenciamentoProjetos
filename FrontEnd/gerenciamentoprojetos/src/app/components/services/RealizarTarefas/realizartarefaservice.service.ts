@@ -11,12 +11,13 @@ export class RealizartarefaserviceService {
 
   url_API:string = "";
 
-  constructor(private loginserver: LoginserviceService) { 
-    this.url_API = "/api/v1/realizarprojetos/"+this.loginserver.getToken();
+  constructor(private login_server: LoginserviceService) { 
+    this.url_API = "/api/v1/realizarprojetos/"+this.login_server.getToken();
   }
 
   async GET(id:number){
     try{
+       this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
         const requestOptions = {
           method: 'GET',
           headers: { 
@@ -35,6 +36,9 @@ export class RealizartarefaserviceService {
   async POST(dataJSON:RealizarTarefasProjetos[])
   { 
     try{
+      
+        this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
+
         const requestOptions = {
           method: 'POST',
           headers: { 

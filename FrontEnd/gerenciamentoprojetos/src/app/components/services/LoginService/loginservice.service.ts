@@ -17,15 +17,40 @@ export class LoginserviceService {
 
   
   getToken(){
-    return String(localStorage.getItem('token'));
+    return String( window.localStorage.getItem('token'));
   }
   getUser(){
-    return String(localStorage.getItem('user'));
+    return String(window.localStorage.getItem('user'));
   }
   get isLoggedIn(): boolean {
     let authToken =  this.getToken();
     return authToken != null && authToken != "" ? true : false;
   }
+
+  async GET(dataJSON:Login[])
+  { 
+    try{
+        const requestOptions = {
+          method: 'GET',
+          headers: { 
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:4200'
+          },
+        };
+        const data = await fetch(API_URL+this.url_API+"/"+dataJSON[0].senha+"/"+dataJSON[0].usuario, requestOptions)
+        .then(response => response.json());
+        if(data != null){                    
+          window.localStorage.setItem('token',data["token"]);
+          window.localStorage.setItem('user',dataJSON[0].usuario);
+          return data;
+        }else{
+          return data;
+        }  
+        
+    } catch (error) {
+      return error;
+    }  
+  } 
 
   async POST(dataJSON:Login[])
   { 

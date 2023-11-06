@@ -9,13 +9,14 @@ import { LoginserviceService } from '../LoginService/loginservice.service';
 export class CadastroserviceService {
   url_API:string = "";
 
-  constructor(private loginserver: LoginserviceService) 
+  constructor(private login_server: LoginserviceService) 
   {
-    this.url_API = "/api/v1/cadastrarprojetos/"+this.loginserver.getToken();
+    this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
   }
 
   async GET(){
     try{
+        this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
         const requestOptions = {
           method: 'GET',
           headers: { 
@@ -34,6 +35,7 @@ export class CadastroserviceService {
   async POST(dataJSON:CadastroProjetos[])
   { 
     try{
+        this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
         const requestOptions = {
           method: 'POST',
           headers: { 
