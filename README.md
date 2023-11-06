@@ -49,3 +49,18 @@ FROM dbGerenciadorProjeto.tbEditarProjeto;
 
 # Mudança na coluna status pelo erro na API ao converter Binario para JSON
 ALTER TABLE dbGerenciadorProjeto.tbEditarProjeto MODIFY COLUMN status INT NOT NULL;
+
+
+# Criar tabela para cadastra e controle de usuario
+CREATE TABLE dbGerenciadorProjeto.tbUsuarios (
+	id INTEGER auto_increment NOT NULL,
+	usuario varchar(100) NOT NULL,
+	senha varchar(100) NOT NULL,
+	token varchar(150) NOT NULL,
+	dataHora DATETIME NOT NULL,
+	email varchar(100) NOT NULL,
+	CONSTRAINT tbUsuarios_PK PRIMARY KEY (id)
+)
+
+# Alterações na tabela
+ALTER TABLE dbGerenciadorProjeto.tbUsuarios MODIFY COLUMN senha varchar(200) CHARACTER SET NOT NULL;

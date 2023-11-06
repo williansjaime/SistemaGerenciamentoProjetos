@@ -9,6 +9,7 @@ import { CadastrarprojetosComponent } from './components/templates/CadastrarProj
 import { EditarprojetosComponent } from './components/templates/EditarProjetos/editarprojetos/editarprojetos.component';
 import { HeaderComponent } from './components/templates/Header/header/header.component';
 import { RealizartarefasComponent } from './components/templates/RealizarTarefas/realizartarefas/realizartarefas.component';
+import { CadastrausuarioComponent } from './components/templates/CadastrarUsuario/cadastrausuario/cadastrausuario.component';
 
 const routes: Routes = [
 ];
@@ -20,7 +21,8 @@ const routes: Routes = [
     CadastrarprojetosComponent,
     EditarprojetosComponent,
     HeaderComponent,
-    RealizartarefasComponent
+    RealizartarefasComponent,
+    CadastrausuarioComponent
   ],
   imports: [
     BrowserModule,

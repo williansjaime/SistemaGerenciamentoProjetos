@@ -5,6 +5,7 @@ from flask import request,json,jsonify
 
 from APISistema.LogFile import LogFile
 from APISistema.BancoDados.AcessarBanco import DB_MySql
+from APISistema.Login import Login
 
 class RealizarProjetos(Resource):
     '''
@@ -12,8 +13,7 @@ class RealizarProjetos(Resource):
     ''' 
     try:
         def get(self,token,id):
-            if token == "williansLindo":
-                print()
+            if Login.verificar_token_db(token):
                 db_mysql = DB_MySql()
                 db_mysql.connect()
                 lista_projetos = {} 
@@ -54,7 +54,7 @@ class RealizarProjetos(Resource):
                 return jsonify(lista_projetos)             
         
         def patch(self,token,id=None):
-            if token == "williansLindo":            
+            if Login.verificar_token_db(token):            
                 my_json = request.data.decode('utf8').replace("'", '"')
                 data = json.loads(my_json)
                 current_dateTime = (str(datetime.now()).split("."))[0]
@@ -84,7 +84,7 @@ class RealizarProjetos(Resource):
                     db_mysql.connection.close()         
         
         def delete(self,token,id):
-            if token == "williansLindo":
+            if Login.verificar_token_db(token):
                 db_mysql = DB_MySql()
                 db_mysql.connect()
                 if db_mysql.connection is None:

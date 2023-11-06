@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Login } from 'src/app/components/interfaces/LoginInterface';
 import { LoginserviceService } from 'src/app/components/services/LoginService/loginservice.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent
   authToken:any='';
   loading:boolean = false;
   user:string = "";
-  
+  login_lista : Login[]=[];
   constructor(private router: Router,private loginserver: LoginserviceService)
   {   
     
@@ -22,8 +23,8 @@ export class LoginComponent
   async login() 
   { 
     this.loading = true;   
-    const userId = document.getElementById('usuario')  as HTMLElement || null;
-    const senhaId = document.getElementById('password') as HTMLElement || null;
+    const userId = document.getElementById('usuario')  as HTMLInputElement || null;
+    const senhaId = document.getElementById('password') as HTMLInputElement || null;
     //Stop submit
     var form = document.querySelector('form');
     if(form != null) {form.addEventListener('submit', function(e){
@@ -31,7 +32,12 @@ export class LoginComponent
     
     if (senhaId != null && userId != null && userId!=undefined && senhaId!=undefined) 
     {
-      console.log(senhaId,userId);
+      this.login_lista[0]={
+        usuario:userId.value,
+        senha:senhaId.value
+      }
+      this.loginserver.POST(this.login_lista);
+      
       this.router.navigate(['/header/cadastrar']);
     }else{
       this.loading = false;
@@ -43,6 +49,6 @@ export class LoginComponent
     var form = document.querySelector('form');
     if(form != null) {form.addEventListener('submit', function(e){
       e.preventDefault();})}
-    this.router.navigate(['/cadastrousuario']);
+    this.router.navigate(['/cadastrausuario']);
   }
 }

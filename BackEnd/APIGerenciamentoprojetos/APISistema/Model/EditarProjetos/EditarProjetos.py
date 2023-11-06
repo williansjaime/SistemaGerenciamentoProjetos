@@ -5,14 +5,15 @@ from flask import request,json,jsonify
 
 from APISistema.LogFile import LogFile
 from APISistema.BancoDados.AcessarBanco import DB_MySql
+from APISistema.Login import Login
 
 class EditarProjetos(Resource):
     '''
-        Class Cadastrar Projetos no Banco
+        Class Editar Projetos
     ''' 
     try:
         def get(self,token,id):
-            if token == "williansLindo":
+            if Login.verificar_token_db(token):
                 db_mysql = DB_MySql()
                 db_mysql.connect()
                 lista_eidte_projetos = {} 
@@ -53,7 +54,7 @@ class EditarProjetos(Resource):
                 return jsonify(lista_eidte_projetos)    
                         
         def post(self,token,id):
-            if token == "williansLindo":            
+            if Login.verificar_token_db(token):            
                 my_json = request.data.decode('utf8').replace("'", '"')
                 data = json.loads(my_json)
                 current_dateTime = (str(datetime.now()).split("."))[0]
