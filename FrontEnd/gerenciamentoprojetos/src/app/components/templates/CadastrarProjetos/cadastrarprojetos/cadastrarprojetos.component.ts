@@ -19,7 +19,7 @@ export class CadastrarprojetosComponent {
   
   constructor(private api_cadastro_projetos: CadastroserviceService,private loginserver: LoginserviceService) 
   {
-    this.user_token = "vazio"; 
+    this.user_token = this.loginserver.getToken();
     this.lista_projeto[0] = {
       ID:String(this.numero_linhas),
       NomeProjeto: "",

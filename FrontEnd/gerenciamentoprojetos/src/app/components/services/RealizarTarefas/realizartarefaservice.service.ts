@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { API_URL } from 'src/app/env';
 import { RealizarTarefasProjetos } from '../../interfaces/RealizarInterface';
+import { LoginserviceService } from '../LoginService/loginservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class RealizartarefaserviceService {
 
   url_API:string = "";
 
-  constructor() { 
-    this.url_API = "/api/v1/realizarprojetos/williansLindo";
+  constructor(private loginserver: LoginserviceService) { 
+    this.url_API = "/api/v1/realizarprojetos/"+this.loginserver.getToken();
   }
 
   async GET(id:number){

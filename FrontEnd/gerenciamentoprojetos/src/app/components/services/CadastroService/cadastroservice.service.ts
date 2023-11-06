@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API_URL } from 'src/app/env';
 import { CadastroProjetos } from '../../interfaces/CadastroInterface';
+import { LoginserviceService } from '../LoginService/loginservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,9 @@ import { CadastroProjetos } from '../../interfaces/CadastroInterface';
 export class CadastroserviceService {
   url_API:string = "";
 
-  constructor() { 
-    this.url_API = "/api/v1/cadastrarprojetos/williansLindo";
+  constructor(private loginserver: LoginserviceService) 
+  {
+    this.url_API = "/api/v1/cadastrarprojetos/"+this.loginserver.getToken();
   }
 
   async GET(){
