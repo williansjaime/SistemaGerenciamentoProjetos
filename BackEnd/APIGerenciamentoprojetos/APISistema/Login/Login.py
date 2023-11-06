@@ -24,10 +24,10 @@ class Login(Resource):
             if not lista_usuario:
                 return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="User does not exist !!"'})
 
-            if not check_password_hash(str(lista_usuario[0]), str(data[0]['senha'])):
+            if not check_password_hash(str(lista_usuario[0]["senha"]), str(data[0]['senha'])):
                 return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="User does not exist !!"'})
 
-            return {'user': data[0]['usuario'].upper(), 'token': lista_usuario[0]}
+            return {'user': data[0]['usuario'].upper(), 'token': lista_usuario[0]["token"]}
            
     except Exception as err:
         traceback.print_exc()
@@ -47,8 +47,8 @@ def verificar_user_db(senha, name):
         """).format(name)
         cursor.execute(slectUser)
         slect_user = cursor.fetchone()
-        List_User = []
-        i = 0
+        List_User = {}
+        i = 0        
         while slect_user:                  
             List_User[i] = {
                 "senha" : slect_user[0],
