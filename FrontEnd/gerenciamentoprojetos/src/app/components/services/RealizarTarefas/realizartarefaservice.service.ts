@@ -17,7 +17,7 @@ export class RealizartarefaserviceService {
 
   async GET(id:number){
     try{
-       this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
+       this.url_API = "/api/v1/realizarprojetos/"+this.login_server.getToken();
         const requestOptions = {
           method: 'GET',
           headers: { 
@@ -37,7 +37,7 @@ export class RealizartarefaserviceService {
   { 
     try{
       
-        this.url_API = "/api/v1/cadastrarprojetos/"+this.login_server.getToken();
+        this.url_API = "/api/v1/realizarprojetos/"+this.login_server.getToken();
 
         const requestOptions = {
           method: 'POST',

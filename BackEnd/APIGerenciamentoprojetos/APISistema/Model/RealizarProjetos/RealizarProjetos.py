@@ -53,7 +53,7 @@ class RealizarProjetos(Resource):
                 db_mysql.connection.close()
                 return jsonify(lista_projetos)             
         
-        def patch(self,token,id=None):
+        def patch(self,token,id):
             if Login.verificar_token_db(token):            
                 my_json = request.data.decode('utf8').replace("'", '"')
                 data = json.loads(my_json)
